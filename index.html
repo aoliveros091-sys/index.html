@@ -454,17 +454,10 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
           <p>Chat with AI • Free</p>
         </div>
       </div>
-      <div class="app-card" onclick="openApp('Cinera', 'https://cinera.cc/')">
+      <div class="app-card" onclick="openApp('Movies', 'https://cinera.cc/')">
         <div class="app-icon">🎬</div>
         <div class="app-info">
-          <h3>Cinera</h3>
-          <p>Watch Movies • Free</p>
-        </div>
-      </div>
-      <div class="app-card" onclick="openApp('DriveFlix', 'https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/netfolixa.html')">
-        <div class="app-icon">🎬</div>
-        <div class="app-info">
-          <h3>DriveFlix (Old)</h3>
+          <h3>Movies</h3>
           <p>Watch Movies • Free</p>
         </div>
       </div>
@@ -492,6 +485,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
 <div id="gameModal">
   <div class="modal-hover-zone" id="modalHoverZone" aria-hidden="true"></div>
   <div class="modal-controls" id="modalControls">
+    <button class="modal-btn" id="oldMoviesBtn" style="display:none;" onclick="openApp('DriveFlix Old', 'https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/netfolixa.html')">Old Movies</button>
     <button class="modal-btn" id="fullscreenBtn">⛶ Fullscreen</button>
     <button class="modal-btn" id="closeBtn">Close ✕</button>
   </div>
@@ -1134,6 +1128,14 @@ function openInModal(name, url) {
   if (!url) return;
   activeSessionName = name || 'this session';
   activeSessionUrl = url;
+  
+  const oldMoviesBtn = document.getElementById('oldMoviesBtn');
+  if (name && name.toLowerCase().includes('movie')) {
+    oldMoviesBtn.style.display = 'inline-block';
+  } else {
+    oldMoviesBtn.style.display = 'none';
+  }
+
   gameFrame.src = 'about:blank';
   hideModalError();
   gameModal.style.display = 'flex';
