@@ -1031,16 +1031,23 @@ const modalError = document.getElementById('modalError');
 const particlesEl = document.getElementById('particles');
 const filterBar = document.getElementById('filterBar');
 
-/* ========== EXTERNAL SOURCES (GN Math etc.) ========== */
+/* ========== EXTERNAL SOURCES (GN Math, NettleWeb, etc.) ========== */
 const externalSources = [
- {
- name: "GN Math Zone",
- type: "json",
- json: "https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json",
- cover: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
- html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main",
- sourceTag: "gnmath"
- }
+  {
+    name: "GN Math Zone",
+    type: "json",
+    json: "https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json",
+    cover: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
+    html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main",
+    sourceTag: "gnmath"
+  },
+  {
+    name: "NettleWeb",
+    type: "nettleweb",
+    json: "https://cdn.jsdelivr.net/gh/nettleweb/nettleweb@main/games.json",
+    htmlBase: "https://nettleweb.github.io/nettleweb/games/",
+    sourceTag: "nettleweb"
+  }
 ];
 
 /* ========== FULL GAME LIST ========== */
@@ -1339,9 +1346,12 @@ function renderGames(list) {
  card.href = '#';
  card.className = 'game-card';
  card.style.animationDelay = (Math.min(i, 30) * 0.025) + 's';
- const sourceBadge = game.source === 'gnmath'
- ? '<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">GN Math</span>'
- : '<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">Uranium</span>';
+ 
+ let badgeText = 'Uranium';
+ if (game.source === 'gnmath') badgeText = 'GN Math';
+ else if (game.source === 'nettleweb') badgeText = 'NettleWeb';
+
+ const sourceBadge = `<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">${badgeText}</span>`;
  const fav = isFavorite(game);
  const favClass = fav ? 'favorited' : '';
  const favIcon = fav ? '★' : '☆';
@@ -1374,6 +1384,7 @@ function buildFilterBar() {
  { id: 'favorites', label: 'Favorites' },
  { id: 'uranium', label: 'Uranium' },
  { id: 'gnmath', label: 'GN Math' },
+ { id: 'nettleweb', label: 'NettleWeb' },
  { id: 'flash', label: 'Flash' },
  { id: 'port', label: 'Ports' },
  { id: 'emulator', label: 'Emulator' },
@@ -1406,6 +1417,8 @@ function handleSearch() {
  results = results.filter(g => g.source === 'uranium');
  } else if (currentFilter === 'gnmath') {
  results = results.filter(g => g.source === 'gnmath');
+ } else if (currentFilter === 'nettleweb') {
+ results = results.filter(g => g.source === 'nettleweb');
  } else if (['flash', 'port', 'emulator', 'fnf'].includes(currentFilter)) {
  results = results.filter(g => Array.isArray(g.special) && g.special.includes(currentFilter));
  }
@@ -1428,12 +1441,36 @@ if (clearSearchBtn) {
  };
 }
 
-async function fetchGnMathSource(src) {
+async function fetchExternalSource(src) {
  try {
  const res = await fetch(src.json + '?t=' + Date.now());
  if (!res.ok) throw new Error('HTTP ' + res.status);
  const data = await res.json();
  if (!Array.isArray(data)) return [];
+
+ if (src.type === 'nettleweb') {
+  return data
+  .filter(g => g && g.name && g.url)
+  .map(g => {
+   let resolvedUrl = g.url;
+   if (!resolvedUrl.startsWith('http://') && !resolvedUrl.startsWith('https://')) {
+    resolvedUrl = src.htmlBase + resolvedUrl.replace(/^\//, '');
+   }
+   let resolvedCover = g.image || g.cover || '';
+   if (resolvedCover && !resolvedCover.startsWith('http://') && !resolvedCover.startsWith('https://')) {
+    resolvedCover = 'https://nettleweb.github.io/nettleweb/' + resolvedCover.replace(/^\//, '');
+   }
+   return {
+    name: g.name,
+    author: g.author || 'NettleWeb',
+    resolvedCover: resolvedCover,
+    resolvedUrl: resolvedUrl,
+    source: src.sourceTag,
+    special: Array.isArray(g.special) ? g.special : []
+   };
+  });
+ }
+
  return data
  .filter(g => g && g.name && g.url && g.id !== -1)
  .map(g => {
@@ -1473,11 +1510,11 @@ async function loadAllSources() {
  }));
 
  const externalLists = await Promise.all(
- externalSources.map(src => fetchGnMathSource(src))
+ externalSources.map(src => fetchExternalSource(src))
  );
- const gnGames = externalLists.flat();
+ const externalGames = externalLists.flat();
 
- allGames = [...uraniumGames, ...gnGames];
+ allGames = [...uraniumGames, ...externalGames];
 
  const unique = [];
  const seen = new Set();
@@ -1496,9 +1533,10 @@ async function loadAllSources() {
 
  const uCount = allGames.filter(g => g.source === 'uranium').length;
  const gCount = allGames.filter(g => g.source === 'gnmath').length;
+ const nCount = allGames.filter(g => g.source === 'nettleweb').length;
  statusLine.textContent = settings.stealth
  ? `${allGames.length} resources ready`
- : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount}`;
+ : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount} - NettleWeb ${nCount}`;
 
  buildFilterBar();
  handleSearch();
@@ -1813,9 +1851,10 @@ function importDataFromObject(obj) {
  } catch (_) {}
  const uCount = allGames.filter(g => g.source === 'uranium').length;
  const gCount = allGames.filter(g => g.source === 'gnmath').length;
+ const nCount = allGames.filter(g => g.source === 'nettleweb').length;
  statusLine.textContent = settings.stealth
  ? `${allGames.length} resources ready`
- : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount}`;
+ : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount} - NettleWeb ${nCount}`;
  buildFilterBar();
  handleSearch();
  }
