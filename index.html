@@ -1031,7 +1031,7 @@ const modalError = document.getElementById('modalError');
 const particlesEl = document.getElementById('particles');
 const filterBar = document.getElementById('filterBar');
 
-/* ========== EXTERNAL SOURCES (GN Math, NettleWeb, etc.) ========== */
+/* ========== EXTERNAL SOURCES (GN Math etc.) ========== */
 const externalSources = [
  {
  name: "GN Math Zone",
@@ -1040,13 +1040,6 @@ const externalSources = [
  cover: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
  html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main",
  sourceTag: "gnmath"
- },
- {
- name: "NettleWeb",
- type: "nettleweb",
- json: "https://raw.githubusercontent.com/nettleweb/nettleweb/main/games.json",
- htmlBase: "https://nettleweb.github.io/nettleweb/games/",
- sourceTag: "nettleweb"
  }
 ];
 
@@ -1346,12 +1339,9 @@ function renderGames(list) {
  card.href = '#';
  card.className = 'game-card';
  card.style.animationDelay = (Math.min(i, 30) * 0.025) + 's';
- 
- let tagText = 'Uranium';
- if (game.source === 'gnmath') tagText = 'GN Math';
- else if (game.source === 'nettleweb') tagText = 'NettleWeb';
- const sourceBadge = `<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">${tagText}</span>`;
-
+ const sourceBadge = game.source === 'gnmath'
+ ? '<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">GN Math</span>'
+ : '<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">Uranium</span>';
  const fav = isFavorite(game);
  const favClass = fav ? 'favorited' : '';
  const favIcon = fav ? '★' : '☆';
@@ -1383,7 +1373,6 @@ function buildFilterBar() {
  { id: 'all', label: 'All' },
  { id: 'favorites', label: 'Favorites' },
  { id: 'uranium', label: 'Uranium' },
- { id: 'nettleweb', label: 'NettleWeb' },
  { id: 'gnmath', label: 'GN Math' },
  { id: 'flash', label: 'Flash' },
  { id: 'port', label: 'Ports' },
@@ -1417,8 +1406,6 @@ function handleSearch() {
  results = results.filter(g => g.source === 'uranium');
  } else if (currentFilter === 'gnmath') {
  results = results.filter(g => g.source === 'gnmath');
- } else if (currentFilter === 'nettleweb') {
- results = results.filter(g => g.source === 'nettleweb');
  } else if (['flash', 'port', 'emulator', 'fnf'].includes(currentFilter)) {
  results = results.filter(g => Array.isArray(g.special) && g.special.includes(currentFilter));
  }
@@ -1447,22 +1434,6 @@ async function fetchGnMathSource(src) {
  if (!res.ok) throw new Error('HTTP ' + res.status);
  const data = await res.json();
  if (!Array.isArray(data)) return [];
-
- // NettleWeb Parser
- if (src.type === 'nettleweb') {
-   return data
-     .filter(g => g && g.name && g.url)
-     .map(g => ({
-       name: g.name,
-       author: 'NettleWeb',
-       resolvedCover: g.image || '',
-       resolvedUrl: src.htmlBase + g.url,
-       source: src.sourceTag,
-       special: g.tags || []
-     }));
- }
-
- // Default GN Math Parser
  return data
  .filter(g => g && g.name && g.url && g.id !== -1)
  .map(g => {
@@ -1504,9 +1475,9 @@ async function loadAllSources() {
  const externalLists = await Promise.all(
  externalSources.map(src => fetchGnMathSource(src))
  );
- const extGames = externalLists.flat();
+ const gnGames = externalLists.flat();
 
- allGames = [...uraniumGames, ...extGames];
+ allGames = [...uraniumGames, ...gnGames];
 
  const unique = [];
  const seen = new Set();
@@ -1525,10 +1496,9 @@ async function loadAllSources() {
 
  const uCount = allGames.filter(g => g.source === 'uranium').length;
  const gCount = allGames.filter(g => g.source === 'gnmath').length;
- const nCount = allGames.filter(g => g.source === 'nettleweb').length;
  statusLine.textContent = settings.stealth
  ? `${allGames.length} resources ready`
- : `${allGames.length} games ready - Uranium: ${uCount} | NettleWeb: ${nCount} | GN Math: ${gCount}`;
+ : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount}`;
 
  buildFilterBar();
  handleSearch();
@@ -1843,10 +1813,9 @@ function importDataFromObject(obj) {
  } catch (_) {}
  const uCount = allGames.filter(g => g.source === 'uranium').length;
  const gCount = allGames.filter(g => g.source === 'gnmath').length;
- const nCount = allGames.filter(g => g.source === 'nettleweb').length;
  statusLine.textContent = settings.stealth
  ? `${allGames.length} resources ready`
- : `${allGames.length} games ready - Uranium: ${uCount} | NettleWeb: ${nCount} | GN Math: ${gCount}`;
+ : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount}`;
  buildFilterBar();
  handleSearch();
  }
