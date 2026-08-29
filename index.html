@@ -73,6 +73,7 @@ header::before{
  50%{box-shadow:0 0 calc(60px * var(--glow)) rgba(var(--primary-rgb),0.5),inset 0 0 80px rgba(var(--primary-rgb),0.12),0 10px 36px rgba(0,0,0,0.55);}
 }
 
+/* Header Logo Styling */
 .header-logo-wrap {
  width: 84px;
  height: 84px;
@@ -115,6 +116,7 @@ h1{
 .clock-date{font-size:0.72em;opacity:0.7;}
 .weather-temp{font-size:0.78em;font-weight:600;opacity:0.9;color:var(--primary);margin-top:2px;}
 
+/* ===== APPS BUTTON + DROPDOWN ===== */
 .apps-wrap {
  position: relative;
 }
@@ -198,6 +200,7 @@ h1{
 }
 .clear-search-btn:hover{opacity:1;}
 
+/* Level button next to clock */
 .level-btn{
  margin-top:4px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;
  background:rgba(0,0,0,0.35);border:1px solid rgba(var(--primary-rgb),0.35);
@@ -234,6 +237,7 @@ h1{
 .level-stats li{padding:6px 0;border-top:1px solid rgba(var(--primary-rgb),0.12);}
 .level-stats strong{color:var(--primary);}
 
+/* Continue Playing */
 .continue-section{margin-bottom:22px;}
 .section-title{
  font-size:1.1em;color:var(--primary);margin-bottom:12px;
@@ -261,6 +265,7 @@ h1{
  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
+/* Favorite button on game cards */
 .fav-btn{
  position:absolute;top:8px;right:8px;z-index:5;
  width:32px;height:32px;border-radius:50%;border:none;
@@ -349,6 +354,7 @@ h1{
 }
 @keyframes spin{to{transform:rotate(360deg);}}
 
+/* ===== GAME & LINKS MODALS ===== */
 #gameModal, #linksModal{
  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.94);
  z-index:9999;align-items:center;justify-content:center;flex-direction:column;
@@ -410,6 +416,7 @@ h1{
 }
 #modalError{display:none;flex-direction:column;align-items:center;gap:12px;color:#ff5c5c;text-align:center;max-width:420px;}
 
+/* Settings Panel */
 .settings-panel{
  position:fixed;top:0;right:-400px;width:380px;max-width:95vw;height:100%;
  background:rgba(8,14,22,0.97);backdrop-filter:blur(18px);
@@ -440,6 +447,7 @@ h1{
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;display:none;}
 .overlay.show{display:block;}
 
+/* Achievement toast */
 #achToast{
  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
  background:rgba(8,14,22,0.95);border:1px solid rgba(var(--primary-rgb),0.45);
@@ -450,6 +458,7 @@ h1{
 }
 #achToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* ===== ANNOUNCEMENT POPUP ===== */
 #announceOverlay{
  display:none;position:fixed;inset:0;z-index:20000;
  background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);
@@ -498,6 +507,7 @@ h1{
 }
 .announce-actions .announce-discord:hover{filter:brightness(1.1);transform:scale(1.03);}
 
+/* Stealth visual */
 body.stealth header::before{content:'';}
 body.stealth h1{
  background:linear-gradient(90deg,#4285f4,#34a853,#fbbc05,#ea4335);
@@ -517,6 +527,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
 <div class="floating-particles" id="particles"></div>
 <div id="achToast" role="status" aria-live="polite"></div>
 
+<!-- Level panel -->
 <div id="levelOverlay" class="level-overlay" aria-hidden="true">
  <div class="level-panel" role="dialog" aria-labelledby="levelPanelTitle">
  <div class="level-panel-head">
@@ -550,6 +561,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  </button>
  </div>
  
+ <!-- Cool Uranium Orbit Core Logo -->
  <div class="header-logo-wrap">
   <svg class="header-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50" cy="50" r="46" stroke="var(--primary)" stroke-width="3" fill="none" opacity="0.4" stroke-dasharray="6 6"/>
@@ -593,6 +605,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  <button class="settings-btn" id="openSettings">Settings</button>
  </div>
 
+ <!-- Continue Playing -->
  <div class="continue-section" id="continueSection" style="display:none;">
  <div class="section-title">Continue Playing</div>
  <div class="continue-row" id="continueRow"></div>
@@ -608,6 +621,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  </div>
 </div>
 
+<!-- GAME MODAL -->
 <div id="gameModal">
  <div class="modal-hover-zone" id="modalHoverZone" aria-hidden="true"></div>
  <div class="modal-controls" id="modalControls">
@@ -622,6 +636,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  </div>
 </div>
 
+<!-- LINKS MODAL -->
 <div id="linksModal">
  <div class="modal-controls visible" style="position:relative; margin-bottom: 10px;">
  <button class="modal-btn" id="closeLinksBtn">Close X</button>
@@ -629,6 +644,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  <iframe id="linksFrame" src="about:blank" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-modals"></iframe>
 </div>
 
+<!-- ANNOUNCEMENT POPUP -->
 <div id="announceOverlay" role="dialog" aria-modal="true" aria-labelledby="announceTitle">
  <div class="announce-box">
  <h2 id="announceTitle">Welcome to Uranium</h2>
@@ -645,6 +661,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
 <aside class="settings-panel" id="settingsPanel">
  <h2>Settings</h2>
 
+ <!-- WALLPAPER SELECTION -->
  <div class="settings-group">
  <label>Wallpaper Preset</label>
  <select id="setWallpaper">
@@ -657,6 +674,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  </select>
  </div>
 
+ <!-- PANIC KEY FEATURE -->
  <div class="settings-group">
  <label>Panic Key Target URL</label>
  <input type="text" id="setPanicUrl" placeholder="https://www.google.com" value="https://www.google.com">
@@ -665,6 +683,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
  </p>
  </div>
 
+ <!-- ABOUT:BLANK MODES -->
  <div class="settings-group">
  <label class="settings-row">
  <span>Open games in about:blank</span>
@@ -771,6 +790,7 @@ body.reduced-motion *,body.reduced-motion *::before,body.reduced-motion *::after
 </aside>
 
 <script>
+/* REAL GEOLOCATION WEATHER DATA */
 async function fetchUserWeather() {
  const el = document.getElementById('weatherTemp');
  if (!el) return;
@@ -792,7 +812,7 @@ async function fetchUserWeather() {
  if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(
    (pos) => getWeather(pos.coords.latitude, pos.coords.longitude),
-   () => getWeather(40.7128, -74.0060)
+   () => getWeather(40.7128, -74.0060) // Default fallback New York
   );
  } else {
   getWeather(40.7128, -74.0060);
@@ -834,6 +854,7 @@ let currentBlobUrl = null;
 let cloakInterval = null;
 let currentFilter = 'all';
 
+/* ===== PLAYER DATA (favorites, recent, XP) ===== */
 function loadPlayerData() {
  try {
  const raw = localStorage.getItem('uraniumPlayer');
@@ -1010,6 +1031,7 @@ const modalError = document.getElementById('modalError');
 const particlesEl = document.getElementById('particles');
 const filterBar = document.getElementById('filterBar');
 
+/* ========== EXTERNAL SOURCES (GN Math, NettleWeb, Parcoil) ========== */
 const externalSources = [
   {
     name: "GN Math Zone",
@@ -1018,52 +1040,24 @@ const externalSources = [
     cover: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
     html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main",
     sourceTag: "gnmath"
+  },
+  {
+    name: "NettleWeb",
+    type: "nettleweb",
+    json: "https://cdn.jsdelivr.net/gh/nettleweb/nettleweb@main/games.json",
+    htmlBase: "https://nettleweb.github.io/nettleweb/games/",
+    sourceTag: "nettleweb"
+  },
+  {
+    name: "Parcoil NativeLite",
+    type: "parcoil",
+    json: "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/data.json",
+    base: "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/",
+    sourceTag: "parcoil"
   }
 ];
 
-/* EMBEDDED NETTLEWEB COLLECTION (Local & Offline Ready) */
-const nettleWebGames = [
- { name: "Slope", path: "slope", cover: "slope.png" },
- { name: "1v1.LOL", path: "1v1lol", cover: "1v1lol.png" },
- { name: "Retro Bowl", path: "retro-bowl", cover: "retrobowl.png" },
- { name: "BitLife", path: "bitlife", cover: "bitlife.png" },
- { name: "Crossy Road", path: "crossyroad", cover: "crossyroad.png" },
- { name: "Cluster Rush", path: "clusterrush", cover: "clusterrush.png" },
- { name: "Basket Random", path: "basket-random", cover: "basketrandom.png" },
- { name: "Basket Bros", path: "basketbros", cover: "basketbros.png" },
- { name: "Subway Surfers", path: "subwaysurfers", cover: "subwaysurfers.png" },
- { name: "Drive Mad", path: "drive-mad", cover: "drivemad.png" },
- { name: "Moto X3M", path: "motox3m", cover: "motox3m.png" },
- { name: "Paper.io 2", path: "paperio2", cover: "paperio2.png" },
- { name: "Smash Karts", path: "smashkarts", cover: "smashkarts.png" },
- { name: "Getaway Shootout", path: "getaway-shootout", cover: "getawayshootout.png" },
- { name: "Rooftop Snipers", path: "rooftop-snipers", cover: "rooftopsnipers.png" },
- { name: "Tunnel Rush", path: "tunnel-rush", cover: "tunnelrush.png" },
- { name: "Cookie Clicker", path: "cookieclicker", cover: "cookieclicker.png" },
- { name: "A Small World Cup", path: "asmallworldcup", cover: "asmallworldcup.png" },
- { name: "Soccer Random", path: "soccer-random", cover: "soccerrandom.png" },
- { name: "Boxing Random", path: "boxing-random", cover: "boxingrandom.png" },
- { name: "Volley Random", path: "volley-random", cover: "volleyrandom.png" },
- { name: "Vex 3", path: "vex3", cover: "vex3.png" },
- { name: "Vex 4", path: "vex4", cover: "vex4.png" },
- { name: "Vex 5", path: "vex5", cover: "vex5.png" },
- { name: "Vex 6", path: "vex6", cover: "vex6.png" },
- { name: "Vex 7", path: "vex7", cover: "vex7.png" },
- { name: "Tiny Fishing", path: "tiny-fishing", cover: "tinyfishing.png" },
- { name: "Drift Hunters", path: "drifthunters", cover: "drifthunters.png" },
- { name: "Madalin Stunt Cars 2", path: "madalin-stunt-cars-2", cover: "madalinstuntcars2.png" },
- { name: "Stickman Hook", path: "stickman-hook", cover: "stickmanhook.png" },
- { name: "Bad Ice Cream", path: "bad-ice-cream", cover: "badicecream.png" },
- { name: "Geometry Dash", path: "geometry-dash", cover: "geometrydash.png" }
-].map(g => ({
- name: g.name,
- author: 'NettleWeb',
- resolvedCover: `https://nettleweb.github.io/nettleweb/images/${g.cover}`,
- resolvedUrl: `https://nettleweb.github.io/nettleweb/games/${g.path}/index.html`,
- source: 'nettleweb',
- special: []
-}));
-
+/* ========== FULL GAME LIST ========== */
 const customGames = [
  { name:"Doom", author:"id Software", resolvedCover:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/images/1200.webp", resolvedUrl:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/doom.html" },
  { name:"Doom 2", author:"id Software", resolvedCover:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/images/ss_05f81f237a6370c3c797af951b42291dc747d199.1920x1080.jpg", resolvedUrl:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/doom2.html" },
@@ -1199,6 +1193,7 @@ const customGames = [
  { name:"Flappy bird", author:"Unknown", resolvedCover:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/images/images%20(59).jpeg", resolvedUrl:"https://cdn.jsdelivr.net/gh/Onex558/Ultimate-games-stash-games-@main/UGS-Files/clflappybird.html" },
 ];
 
+/* ========== SETTINGS ========== */
 function loadSettings() {
  try {
  const raw = localStorage.getItem('uraniumSettings');
@@ -1209,6 +1204,7 @@ function saveSettings() {
  localStorage.setItem('uraniumSettings', JSON.stringify(settings));
 }
 
+/* ========== IMPROVED TAB CLOAKING ========== */
 const CLOAK_PROFILES = [
  { title: "Google Slides", icon: "S" },
  { title: "Google Docs", icon: "D" },
@@ -1343,6 +1339,7 @@ function updateClock() {
  document.getElementById('clockDate').textContent = now.toLocaleDateString([], optsDate);
 }
 
+/* ========== RENDER ========== */
 function renderGames(list) {
  gameCountEl.textContent = list.length + ' Games';
  gamesGrid.innerHTML = '';
@@ -1356,12 +1353,12 @@ function renderGames(list) {
  card.href = '#';
  card.className = 'game-card';
  card.style.animationDelay = (Math.min(i, 30) * 0.025) + 's';
- 
- let badgeText = 'Uranium';
- if (game.source === 'gnmath') badgeText = 'GN Math';
- else if (game.source === 'nettleweb') badgeText = 'NettleWeb';
+ let sourceLabel = 'Uranium';
+ if (game.source === 'gnmath') sourceLabel = 'GN Math';
+ else if (game.source === 'nettleweb') sourceLabel = 'NettleWeb';
+ else if (game.source === 'parcoil') sourceLabel = 'Parcoil';
 
- const sourceBadge = `<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">${badgeText}</span>`;
+ const sourceBadge = `<span style="font-size:0.65em;opacity:0.55;letter-spacing:0.5px;">${sourceLabel}</span>`;
  const fav = isFavorite(game);
  const favClass = fav ? 'favorited' : '';
  const favIcon = fav ? '★' : '☆';
@@ -1394,7 +1391,7 @@ function buildFilterBar() {
  { id: 'favorites', label: 'Favorites' },
  { id: 'uranium', label: 'Uranium' },
  { id: 'gnmath', label: 'GN Math' },
- { id: 'nettleweb', label: 'NettleWeb' },
+ { id: 'parcoil', label: 'Parcoil' },
  { id: 'flash', label: 'Flash' },
  { id: 'port', label: 'Ports' },
  { id: 'emulator', label: 'Emulator' },
@@ -1427,8 +1424,8 @@ function handleSearch() {
  results = results.filter(g => g.source === 'uranium');
  } else if (currentFilter === 'gnmath') {
  results = results.filter(g => g.source === 'gnmath');
- } else if (currentFilter === 'nettleweb') {
- results = results.filter(g => g.source === 'nettleweb');
+ } else if (currentFilter === 'parcoil') {
+ results = results.filter(g => g.source === 'parcoil');
  } else if (['flash', 'port', 'emulator', 'fnf'].includes(currentFilter)) {
  results = results.filter(g => Array.isArray(g.special) && g.special.includes(currentFilter));
  }
@@ -1453,38 +1450,77 @@ if (clearSearchBtn) {
 
 async function fetchExternalSource(src) {
  try {
-  const res = await fetch(src.json + '?t=' + Date.now());
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  let rawData = await res.json();
-  
-  if (!Array.isArray(rawData)) return [];
-  return rawData
-  .filter(g => g && g.name && g.url && g.id !== -1)
-  .map(g => {
-   let resolvedUrl = String(g.url)
-   .replace(/\{HTML_URL\}/g, src.html)
-   .replace(/\{COVER_URL\}/g, src.cover);
-   let resolvedCover = String(g.cover || '')
-   .replace(/\{COVER_URL\}/g, src.cover)
-   .replace(/\{HTML_URL\}/g, src.html);
-   if (resolvedUrl.startsWith('{')) resolvedUrl = g.url;
-   if (resolvedCover.startsWith('{') || !resolvedCover) {
-    resolvedCover = '';
-   }
-   return {
-    name: g.name,
-    author: g.author || 'GN Math',
-    resolvedCover,
-    resolvedUrl,
-    source: src.sourceTag,
-    special: Array.isArray(g.special) ? g.special : [],
-    id: g.id
-   };
-  })
-  .filter(g => g.resolvedUrl && (g.resolvedUrl.startsWith('http') || g.resolvedUrl.startsWith('//')));
+ const res = await fetch(src.json + '?t=' + Date.now());
+ if (!res.ok) throw new Error('HTTP ' + res.status);
+ const data = await res.json();
+ 
+ if (src.type === 'parcoil') {
+   const items = Array.isArray(data) ? data : (data.games || data.items || []);
+   return items
+    .filter(g => g && g.name && (g.url || g.path || g.file || g.id))
+    .map(g => {
+      let relativeUrl = g.url || g.path || g.file || (g.id + '/index.html');
+      if (relativeUrl.startsWith('/')) relativeUrl = relativeUrl.slice(1);
+      
+      let resolvedUrl = relativeUrl.startsWith('http') ? relativeUrl : src.base + relativeUrl;
+      let resolvedCover = g.image || g.img || g.cover || g.icon || '';
+      if (resolvedCover && !resolvedCover.startsWith('http')) {
+        if (resolvedCover.startsWith('/')) resolvedCover = resolvedCover.slice(1);
+        resolvedCover = src.base + resolvedCover;
+      }
+      
+      return {
+        name: g.name || g.title,
+        author: g.author || g.developer || 'Parcoil',
+        resolvedCover,
+        resolvedUrl,
+        source: src.sourceTag,
+        special: Array.isArray(g.special) ? g.special : []
+      };
+    })
+    .filter(g => g.resolvedUrl);
+ }
+
+ if (src.type === 'nettleweb') {
+   if (!Array.isArray(data)) return [];
+   return data.map(g => ({
+     name: g.title || g.name,
+     author: 'NettleWeb',
+     resolvedCover: g.image || g.cover || '',
+     resolvedUrl: src.htmlBase + (g.url || g.id || ''),
+     source: src.sourceTag,
+     special: []
+   })).filter(g => g.resolvedUrl);
+ }
+
+ if (!Array.isArray(data)) return [];
+ return data
+ .filter(g => g && g.name && g.url && g.id !== -1)
+ .map(g => {
+ let resolvedUrl = String(g.url)
+ .replace(/\{HTML_URL\}/g, src.html)
+ .replace(/\{COVER_URL\}/g, src.cover);
+ let resolvedCover = String(g.cover || '')
+ .replace(/\{COVER_URL\}/g, src.cover)
+ .replace(/\{HTML_URL\}/g, src.html);
+ if (resolvedUrl.startsWith('{')) resolvedUrl = g.url;
+ if (resolvedCover.startsWith('{') || !resolvedCover) {
+ resolvedCover = '';
+ }
+ return {
+ name: g.name,
+ author: g.author || 'GN Math',
+ resolvedCover,
+ resolvedUrl,
+ source: src.sourceTag,
+ special: Array.isArray(g.special) ? g.special : [],
+ id: g.id
+ };
+ })
+ .filter(g => g.resolvedUrl && (g.resolvedUrl.startsWith('http') || g.resolvedUrl.startsWith('//')));
  } catch (err) {
-  console.warn('Failed to load', src.name, err);
-  return [];
+ console.warn('Failed to load', src.name, err);
+ return [];
  }
 }
 
@@ -1499,9 +1535,9 @@ async function loadAllSources() {
  const externalLists = await Promise.all(
  externalSources.map(src => fetchExternalSource(src))
  );
- const externalGames = externalLists.flat();
+ const fetchedGames = externalLists.flat();
 
- allGames = [...uraniumGames, ...nettleWebGames, ...externalGames];
+ allGames = [...uraniumGames, ...fetchedGames];
 
  const unique = [];
  const seen = new Set();
@@ -1520,15 +1556,16 @@ async function loadAllSources() {
 
  const uCount = allGames.filter(g => g.source === 'uranium').length;
  const gCount = allGames.filter(g => g.source === 'gnmath').length;
- const nCount = allGames.filter(g => g.source === 'nettleweb').length;
+ const pCount = allGames.filter(g => g.source === 'parcoil').length;
  statusLine.textContent = settings.stealth
  ? `${allGames.length} resources ready`
- : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount} - NettleWeb ${nCount}`;
+ : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount} - Parcoil ${pCount}`;
 
  buildFilterBar();
  handleSearch();
 }
 
+/* ========== GAME / APP / LINKS OPENING ========== */
 function showModalError(name, reason) {
  gameFrame.style.display = 'none';
  modalError.style.display = 'flex';
@@ -1703,6 +1740,7 @@ function closeModal() {
  }
 }
 
+/* LINKS MODAL HANDLERS */
 const linksModal = document.getElementById('linksModal');
 const linksFrame = document.getElementById('linksFrame');
 const closeLinksBtn = document.getElementById('closeLinksBtn');
@@ -1779,6 +1817,7 @@ gameModal.addEventListener('touchstart', (e) => {
  if (e.touches[0].clientY <= 80) showModalChrome();
 }, { passive: true });
 
+/* ========== EXPORT / DOWNLOAD / IMPORT DATA ========== */
 function buildExportPayload() {
  return {
  version: 1,
@@ -1835,10 +1874,10 @@ function importDataFromObject(obj) {
  } catch (_) {}
  const uCount = allGames.filter(g => g.source === 'uranium').length;
  const gCount = allGames.filter(g => g.source === 'gnmath').length;
- const nCount = allGames.filter(g => g.source === 'nettleweb').length;
+ const pCount = allGames.filter(g => g.source === 'parcoil').length;
  statusLine.textContent = settings.stealth
  ? `${allGames.length} resources ready`
- : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount} - NettleWeb ${nCount}`;
+ : `${allGames.length} games ready - Uranium ${uCount} - GN Math ${gCount} - Parcoil ${pCount}`;
  buildFilterBar();
  handleSearch();
  }
@@ -1881,6 +1920,7 @@ function openSiteInAboutBlank() {
  }
 }
 
+/* ========== SETTINGS UI ========== */
 const panel = document.getElementById('settingsPanel');
 const overlay = document.getElementById('settingsOverlay');
 
@@ -1954,6 +1994,7 @@ function exportFavoritesOnly() {
 const exportFavBtn = document.getElementById('exportFavBtn');
 if (exportFavBtn) exportFavBtn.onclick = exportFavoritesOnly;
 
+/* ========== APPS DROPDOWN ========== */
 const appsBtn = document.getElementById('appsBtn');
 const appsDropdown = document.getElementById('appsDropdown');
 function closeAppsDropdown() {
@@ -2026,6 +2067,7 @@ document.getElementById('importDataFile').onchange = e => {
 };
 document.getElementById('openSiteAboutBlankSettings').onclick = openSiteInAboutBlank;
 
+/* ========== PANIC KEY EVENT LISTENER ========== */
 document.addEventListener('keydown', e => {
  if (e.key === '`' || e.key === '~') {
  e.preventDefault();
@@ -2074,6 +2116,7 @@ applySettings();
 updateClock();
 setInterval(updateClock, 1000);
 
+/* ===== FIRST-VISIT ANNOUNCEMENT ===== */
 function showAnnouncementIfNeeded() {
  try {
  if (localStorage.getItem('uraniumAnnounceSeen') === '1') return;
