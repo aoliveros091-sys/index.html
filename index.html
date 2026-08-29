@@ -1047,16 +1047,39 @@ const externalSources = [
     json: "https://cdn.jsdelivr.net/gh/nettleweb/nettleweb@main/games.json",
     htmlBase: "https://nettleweb.github.io/nettleweb/games/",
     sourceTag: "nettleweb"
-  },
-  {
-    name: "Parcoil NativeLite",
-    type: "parcoil",
-    urls: [
-      "https://raw.githubusercontent.com/parcoillegacy/nativelite/main/data.json",
-      "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/data.json"
-    ],
-    sourceTag: "parcoil"
   }
+];
+
+/* ========== PARCOIL NATIVELITE DIRECT GAMES LIST ========== */
+const parcoilGames = [
+ { name:"A Small World Cupid", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/asmallworldcupid/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/asmallworldcupid/index.html", source:"parcoil" },
+ { name:"Vex 7", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/vex7/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/vex7/index.html", source:"parcoil" },
+ { name:"Stickman Hook", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/stickmanhook/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/stickmanhook/index.html", source:"parcoil" },
+ { name:"Geometry Dash", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/geometrydash/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/geometrydash/index.html", source:"parcoil" },
+ { name:"Subway Surfers", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/subwaysurfers/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/subwaysurfers/index.html", source:"parcoil" },
+ { name:"Retro Bowl", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/retrobowl/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/retrobowl/index.html", source:"parcoil" },
+ { name:"Tunnel Rush", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/tunnelrush/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/tunnelrush/index.html", source:"parcoil" },
+ { name:"Run 3", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/run3/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/run3/index.html", source:"parcoil" },
+ { name:"Drift Hunters", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/drifthunters/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/drifthunters/index.html", source:"parcoil" },
+ { name:"Moto X3M", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/motox3m/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/motox3m/index.html", source:"parcoil" },
+ { name:"Drive Mad", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/drivemad/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/drivemad/index.html", source:"parcoil" },
+ { name:"BitLife", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/bitlife/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/bitlife/index.html", source:"parcoil" },
+ { name:"Basketball Stars", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/basketballstars/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/basketballstars/index.html", source:"parcoil" },
+ { name:"Temple Run 2", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/templerun2/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/templerun2/index.html", source:"parcoil" },
+ { name:"Paper.io 2", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/paperio2/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/paperio2/index.html", source:"parcoil" },
+ { name:"Smash Karts", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/smashkarts/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/smashkarts/index.html", source:"parcoil" },
+ { name:"Slither.io", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/slitherio/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/slitherio/index.html", source:"parcoil" },
+ { name:"Monkey Mart", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/monkeymart/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/monkeymart/index.html", source:"parcoil" },
+ { name:"Crossy Road", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/crossyroad/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/crossyroad/index.html", source:"parcoil" },
+ { name:"Vex 6", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/vex6/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/vex6/index.html", source:"parcoil" },
+ { name:"Vex 5", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/vex5/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/vex5/index.html", source:"parcoil" },
+ { name:"Getaway Shootout", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/getawayshootout/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/getawayshootout/index.html", source:"parcoil" },
+ { name:"Rooftop Snipers", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/rooftopsnipers/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/rooftopsnipers/index.html", source:"parcoil" },
+ { name:"Cluster Rush", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/clusterrush/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/clusterrush/index.html", source:"parcoil" },
+ { name:"Basketball Legends", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/basketballlegends/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/basketballlegends/index.html", source:"parcoil" },
+ { name:"Tiny Fishing", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/tinyfishing/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/tinyfishing/index.html", source:"parcoil" },
+ { name:"Cookie Clicker", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/cookieclicker/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/cookieclicker/index.html", source:"parcoil" },
+ { name:"Flappy Bird", author:"Parcoil", resolvedCover:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/flappybird/thumb.png", resolvedUrl:"https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/flappybird/index.html", source:"parcoil" }
 ];
 
 /* ========== FULL GAME LIST ========== */
@@ -1451,46 +1474,6 @@ if (clearSearchBtn) {
 }
 
 async function fetchExternalSource(src) {
- if (src.type === 'parcoil') {
-   for (const url of src.urls) {
-     try {
-       const res = await fetch(url + '?t=' + Date.now());
-       if (!res.ok) continue;
-       const data = await res.json();
-       const items = Array.isArray(data) ? data : (data.games || data.items || []);
-       if (!items.length) continue;
-
-       const parcoilBase = "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/";
-
-       return items
-         .filter(g => g && (g.name || g.title))
-         .map(g => {
-           let relUrl = g.url || g.path || g.file || (g.id ? g.id + '/index.html' : '');
-           if (relUrl.startsWith('/')) relUrl = relUrl.slice(1);
-           
-           let resolvedUrl = relUrl.startsWith('http') ? relUrl : parcoilBase + relUrl;
-
-           let relImg = g.image || g.img || g.cover || g.icon || '';
-           if (relImg.startsWith('/')) relImg = relImg.slice(1);
-           let resolvedCover = relImg.startsWith('http') ? relImg : (relImg ? parcoilBase + relImg : '');
-
-           return {
-             name: g.name || g.title,
-             author: g.author || g.developer || 'Parcoil',
-             resolvedCover: resolvedCover,
-             resolvedUrl: resolvedUrl,
-             source: src.sourceTag,
-             special: Array.isArray(g.special) ? g.special : []
-           };
-         })
-         .filter(g => g.resolvedUrl && g.name);
-     } catch(e) {
-       console.warn('Parcoil fetch failed from', url, e);
-     }
-   }
-   return [];
- }
-
  try {
  const res = await fetch(src.json + '?t=' + Date.now());
  if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1552,7 +1535,7 @@ async function loadAllSources() {
  );
  const fetchedGames = externalLists.flat();
 
- allGames = [...uraniumGames, ...fetchedGames];
+ allGames = [...uraniumGames, ...parcoilGames, ...fetchedGames];
 
  const unique = [];
  const seen = new Set();
@@ -2163,3 +2146,4 @@ window.addEventListener('load', () => {
 </script>
 </body>
 </html>
+```
