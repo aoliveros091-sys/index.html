@@ -1018,15 +1018,51 @@ const externalSources = [
     cover: "https://cdn.jsdelivr.net/gh/freebuisness/covers@main",
     html: "https://cdn.jsdelivr.net/gh/freebuisness/html@main",
     sourceTag: "gnmath"
-  },
-  {
-    name: "NettleWeb",
-    type: "nettleweb",
-    json: "https://cdn.jsdelivr.net/gh/nettleweb/nettleweb@main/games.json",
-    htmlBase: "https://nettleweb.github.io/nettleweb/games/",
-    sourceTag: "nettleweb"
   }
 ];
+
+/* EMBEDDED NETTLEWEB COLLECTION (Local & Offline Ready) */
+const nettleWebGames = [
+ { name: "Slope", path: "slope", cover: "slope.png" },
+ { name: "1v1.LOL", path: "1v1lol", cover: "1v1lol.png" },
+ { name: "Retro Bowl", path: "retro-bowl", cover: "retrobowl.png" },
+ { name: "BitLife", path: "bitlife", cover: "bitlife.png" },
+ { name: "Crossy Road", path: "crossyroad", cover: "crossyroad.png" },
+ { name: "Cluster Rush", path: "clusterrush", cover: "clusterrush.png" },
+ { name: "Basket Random", path: "basket-random", cover: "basketrandom.png" },
+ { name: "Basket Bros", path: "basketbros", cover: "basketbros.png" },
+ { name: "Subway Surfers", path: "subwaysurfers", cover: "subwaysurfers.png" },
+ { name: "Drive Mad", path: "drive-mad", cover: "drivemad.png" },
+ { name: "Moto X3M", path: "motox3m", cover: "motox3m.png" },
+ { name: "Paper.io 2", path: "paperio2", cover: "paperio2.png" },
+ { name: "Smash Karts", path: "smashkarts", cover: "smashkarts.png" },
+ { name: "Getaway Shootout", path: "getaway-shootout", cover: "getawayshootout.png" },
+ { name: "Rooftop Snipers", path: "rooftop-snipers", cover: "rooftopsnipers.png" },
+ { name: "Tunnel Rush", path: "tunnel-rush", cover: "tunnelrush.png" },
+ { name: "Cookie Clicker", path: "cookieclicker", cover: "cookieclicker.png" },
+ { name: "A Small World Cup", path: "asmallworldcup", cover: "asmallworldcup.png" },
+ { name: "Soccer Random", path: "soccer-random", cover: "soccerrandom.png" },
+ { name: "Boxing Random", path: "boxing-random", cover: "boxingrandom.png" },
+ { name: "Volley Random", path: "volley-random", cover: "volleyrandom.png" },
+ { name: "Vex 3", path: "vex3", cover: "vex3.png" },
+ { name: "Vex 4", path: "vex4", cover: "vex4.png" },
+ { name: "Vex 5", path: "vex5", cover: "vex5.png" },
+ { name: "Vex 6", path: "vex6", cover: "vex6.png" },
+ { name: "Vex 7", path: "vex7", cover: "vex7.png" },
+ { name: "Tiny Fishing", path: "tiny-fishing", cover: "tinyfishing.png" },
+ { name: "Drift Hunters", path: "drifthunters", cover: "drifthunters.png" },
+ { name: "Madalin Stunt Cars 2", path: "madalin-stunt-cars-2", cover: "madalinstuntcars2.png" },
+ { name: "Stickman Hook", path: "stickman-hook", cover: "stickmanhook.png" },
+ { name: "Bad Ice Cream", path: "bad-ice-cream", cover: "badicecream.png" },
+ { name: "Geometry Dash", path: "geometry-dash", cover: "geometrydash.png" }
+].map(g => ({
+ name: g.name,
+ author: 'NettleWeb',
+ resolvedCover: `https://nettleweb.github.io/nettleweb/images/${g.cover}`,
+ resolvedUrl: `https://nettleweb.github.io/nettleweb/games/${g.path}/index.html`,
+ source: 'nettleweb',
+ special: []
+}));
 
 const customGames = [
  { name:"Doom", author:"id Software", resolvedCover:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/images/1200.webp", resolvedUrl:"https://cdn.jsdelivr.net/gh/Onex558/uranium-source-@main/doom.html" },
@@ -1421,37 +1457,6 @@ async function fetchExternalSource(src) {
   if (!res.ok) throw new Error('HTTP ' + res.status);
   let rawData = await res.json();
   
-  if (src.type === 'nettleweb') {
-   let list = Array.isArray(rawData) ? rawData : (rawData.games || Object.values(rawData) || []);
-   return list
-   .filter(g => g && (g.name || g.title || g.id))
-   .map(g => {
-    let title = g.name || g.title || g.id;
-    let url = g.url || g.path || g.link || (g.id ? g.id + '/' : '');
-    
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-     url = 'https://nettleweb.github.io/nettleweb/games/' + url.replace(/^\/?(games\/)?/, '');
-     if (!url.endsWith('.html') && !url.endsWith('/')) {
-      url += '/';
-     }
-    }
-    
-    let cover = g.image || g.cover || g.img || g.icon || '';
-    if (cover && !cover.startsWith('http://') && !cover.startsWith('https://')) {
-     cover = 'https://nettleweb.github.io/nettleweb/' + cover.replace(/^\//, '');
-    }
-
-    return {
-     name: title,
-     author: g.author || 'NettleWeb',
-     resolvedCover: cover,
-     resolvedUrl: url,
-     source: src.sourceTag,
-     special: Array.isArray(g.special) ? g.special : []
-    };
-   }).filter(g => g.resolvedUrl);
-  }
-
   if (!Array.isArray(rawData)) return [];
   return rawData
   .filter(g => g && g.name && g.url && g.id !== -1)
@@ -1496,7 +1501,7 @@ async function loadAllSources() {
  );
  const externalGames = externalLists.flat();
 
- allGames = [...uraniumGames, ...externalGames];
+ allGames = [...uraniumGames, ...nettleWebGames, ...externalGames];
 
  const unique = [];
  const seen = new Set();
@@ -2100,3 +2105,4 @@ window.addEventListener('load', () => {
 </script>
 </body>
 </html>
+```
