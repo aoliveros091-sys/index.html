@@ -1031,7 +1031,7 @@ const modalError = document.getElementById('modalError');
 const particlesEl = document.getElementById('particles');
 const filterBar = document.getElementById('filterBar');
 
-/* ========== EXTERNAL SOURCES (GN Math, NettleWeb, Parcoil) ========== */
+/* ========== EXTERNAL SOURCES ========== */
 const externalSources = [
   {
     name: "GN Math Zone",
@@ -1051,8 +1051,10 @@ const externalSources = [
   {
     name: "Parcoil NativeLite",
     type: "parcoil",
-    json: "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/data.json",
-    base: "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/",
+    urls: [
+      "https://raw.githubusercontent.com/parcoillegacy/nativelite/main/data.json",
+      "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/data.json"
+    ],
     sourceTag: "parcoil"
   }
 ];
@@ -1449,37 +1451,50 @@ if (clearSearchBtn) {
 }
 
 async function fetchExternalSource(src) {
+ if (src.type === 'parcoil') {
+   for (const url of src.urls) {
+     try {
+       const res = await fetch(url + '?t=' + Date.now());
+       if (!res.ok) continue;
+       const data = await res.json();
+       const items = Array.isArray(data) ? data : (data.games || data.items || []);
+       if (!items.length) continue;
+
+       const parcoilBase = "https://cdn.jsdelivr.net/gh/parcoillegacy/nativelite@main/";
+
+       return items
+         .filter(g => g && (g.name || g.title))
+         .map(g => {
+           let relUrl = g.url || g.path || g.file || (g.id ? g.id + '/index.html' : '');
+           if (relUrl.startsWith('/')) relUrl = relUrl.slice(1);
+           
+           let resolvedUrl = relUrl.startsWith('http') ? relUrl : parcoilBase + relUrl;
+
+           let relImg = g.image || g.img || g.cover || g.icon || '';
+           if (relImg.startsWith('/')) relImg = relImg.slice(1);
+           let resolvedCover = relImg.startsWith('http') ? relImg : (relImg ? parcoilBase + relImg : '');
+
+           return {
+             name: g.name || g.title,
+             author: g.author || g.developer || 'Parcoil',
+             resolvedCover: resolvedCover,
+             resolvedUrl: resolvedUrl,
+             source: src.sourceTag,
+             special: Array.isArray(g.special) ? g.special : []
+           };
+         })
+         .filter(g => g.resolvedUrl && g.name);
+     } catch(e) {
+       console.warn('Parcoil fetch failed from', url, e);
+     }
+   }
+   return [];
+ }
+
  try {
  const res = await fetch(src.json + '?t=' + Date.now());
  if (!res.ok) throw new Error('HTTP ' + res.status);
  const data = await res.json();
- 
- if (src.type === 'parcoil') {
-   const items = Array.isArray(data) ? data : (data.games || data.items || []);
-   return items
-    .filter(g => g && g.name && (g.url || g.path || g.file || g.id))
-    .map(g => {
-      let relativeUrl = g.url || g.path || g.file || (g.id + '/index.html');
-      if (relativeUrl.startsWith('/')) relativeUrl = relativeUrl.slice(1);
-      
-      let resolvedUrl = relativeUrl.startsWith('http') ? relativeUrl : src.base + relativeUrl;
-      let resolvedCover = g.image || g.img || g.cover || g.icon || '';
-      if (resolvedCover && !resolvedCover.startsWith('http')) {
-        if (resolvedCover.startsWith('/')) resolvedCover = resolvedCover.slice(1);
-        resolvedCover = src.base + resolvedCover;
-      }
-      
-      return {
-        name: g.name || g.title,
-        author: g.author || g.developer || 'Parcoil',
-        resolvedCover,
-        resolvedUrl,
-        source: src.sourceTag,
-        special: Array.isArray(g.special) ? g.special : []
-      };
-    })
-    .filter(g => g.resolvedUrl);
- }
 
  if (src.type === 'nettleweb') {
    if (!Array.isArray(data)) return [];
@@ -2148,4 +2163,3 @@ window.addEventListener('load', () => {
 </script>
 </body>
 </html>
-```
